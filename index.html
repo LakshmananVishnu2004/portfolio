@@ -1,137 +1,705 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vishnu — Video Editor Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0a;
+  --bg2: #111111;
+  --bg3: #171717;
+  --border: rgba(255,255,255,0.08);
+  --text: #e0e0e0;
+  --muted: #6b6b6b;
+  --accent: #c8f75a;
+  --white: #ffffff;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 60px;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif; font-weight: 800; font-size: 19px;
+  color: var(--white); letter-spacing: -0.5px;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  color: var(--muted); text-decoration: none; font-size: 14px;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  background: var(--accent); color: #0a0a0a;
+  padding: 10px 22px; border-radius: 4px;
+  font-size: 14px; font-weight: 700; text-decoration: none;
+  font-family: 'Syne', sans-serif; transition: opacity 0.2s;
+}
+.nav-cta:hover { opacity: 0.85; }
+
+/* ── LAYOUT ── */
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 60px; }
+section { padding: 90px 0; max-width: 1160px; margin: 0 auto; padding-left: 60px; padding-right: 60px; }
+.divider { height: 1px; background: var(--border); max-width: 1160px; margin: 0 auto; }
+
+.section-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 18px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-label::before {
+  content: ''; width: 24px; height: 1px; background: var(--accent); display: inline-block;
+}
+h1, h2, h3, h4 { font-family: 'Syne', sans-serif; }
+h2 {
+  font-size: clamp(28px, 3.5vw, 44px); font-weight: 800;
+  letter-spacing: -1.5px; color: var(--white); line-height: 1.1; margin-bottom: 20px;
+}
+
+/* ── HERO ── */
+.hero-wrap {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 140px 60px 80px; max-width: 1160px; margin: 0 auto;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid var(--border); border-radius: 100px;
+  padding: 6px 16px; font-size: 13px; color: var(--muted); margin-bottom: 36px;
+}
+.badge-dot {
+  width: 7px; height: 7px; background: var(--accent); border-radius: 50%;
+  animation: blink 2s ease-in-out infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.25} }
+h1 {
+  font-size: clamp(48px, 7.5vw, 88px); font-weight: 800;
+  line-height: 0.95; letter-spacing: -3px; color: var(--white); margin-bottom: 28px;
+}
+h1 .acc { color: var(--accent); }
+h1 .dim { color: #333; }
+.hero-sub {
+  font-size: 18px; color: var(--muted); max-width: 520px;
+  line-height: 1.75; margin-bottom: 44px; font-weight: 300;
+}
+.hero-btns { display: flex; gap: 14px; }
+.btn-p {
+  background: var(--accent); color: #0a0a0a;
+  padding: 14px 30px; border-radius: 4px;
+  font-family: 'Syne', sans-serif; font-weight: 700; font-size: 15px;
+  text-decoration: none; transition: opacity 0.2s;
+}
+.btn-p:hover { opacity: 0.85; }
+.btn-g {
+  color: var(--text); padding: 14px 30px; border-radius: 4px;
+  border: 1px solid var(--border);
+  font-family: 'Syne', sans-serif; font-weight: 600; font-size: 15px;
+  text-decoration: none; transition: border-color 0.2s;
+}
+.btn-g:hover { border-color: rgba(255,255,255,0.3); color: var(--white); }
+.hero-stats {
+  display: flex; gap: 44px; margin-top: 64px; padding-top: 36px;
+  border-top: 1px solid var(--border); flex-wrap: wrap;
+}
+.stat-n {
+  font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 800;
+  color: var(--white); letter-spacing: -1px;
+}
+.stat-l { font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+/* ── ABOUT ── */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+.about-text { color: var(--muted); font-size: 15.5px; line-height: 1.85; font-weight: 300; }
+.about-text p + p { margin-top: 14px; }
+.about-text strong { color: var(--white); font-weight: 600; }
+.about-side { display: flex; flex-direction: column; gap: 10px; }
+.tool-tag {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: 6px; padding: 13px 18px;
+  font-size: 14px; color: var(--text);
+}
+.tool-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; flex-shrink:0; }
+
+/* ── PROOF BAR ── */
+.proof-bar {
+  margin-top: 56px;
+  background: linear-gradient(135deg, rgba(200,247,90,0.04), var(--bg3));
+  border: 1px solid rgba(200,247,90,0.2);
+  border-radius: 10px; padding: 32px 36px;
+}
+.proof-label {
+  font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 26px; font-weight: 600;
+}
+.proof-nums {
+  display: grid; grid-template-columns: repeat(6,1fr); gap: 16px; text-align: center;
+}
+.proof-n {
+  font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800;
+  color: var(--white); letter-spacing: -1px;
+}
+.proof-n.hi { color: var(--accent); }
+.proof-l { font-size: 12px; color: var(--muted); margin-top: 5px; }
+.proof-footer {
+  margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--border);
+  display: flex; gap: 24px; flex-wrap: wrap; align-items: center;
+}
+.proof-footer span { font-size: 13px; color: var(--muted); }
+.proof-footer a { font-size: 13px; color: var(--accent); text-decoration: none; }
+.proof-footer a:hover { text-decoration: underline; }
+
+/* ── SKILLS ── */
+.skills-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: 10px;
+  overflow: hidden; margin-top: 44px;
+}
+.skill-cell { background: var(--bg2); padding: 30px 26px; transition: background 0.2s; }
+.skill-cell:hover { background: var(--bg3); }
+.skill-cell h4 { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.skill-cell p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ── SERVICES ── */
+.services-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; margin-top: 44px; }
+.svc-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 34px 30px;
+  transition: border-color 0.25s, transform 0.2s;
+  position: relative; overflow: hidden;
+}
+.svc-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  opacity: 0; transition: opacity 0.25s;
+}
+.svc-card:hover { border-color: rgba(200,247,90,0.2); transform: translateY(-2px); }
+.svc-card:hover::before { opacity: 1; }
+.svc-num { font-size: 11px; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 18px; font-weight: 600; }
+.svc-card h3 { font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 10px; letter-spacing: -0.4px; }
+.svc-card p { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 18px; }
+.svc-for { font-size: 12px; color: var(--accent); font-weight: 500; }
+
+/* ── PROJECTS ── */
+.proj-list {
+  display: flex; flex-direction: column;
+  border: 1px solid var(--border); border-radius: 10px;
+  overflow: hidden; margin-top: 44px;
+}
+.proj-item { background: var(--bg2); cursor: pointer; border-top: 1px solid var(--border); }
+.proj-item:first-child { border-top: none; }
+.proj-item:hover { background: var(--bg3); }
+.proj-header {
+  display: grid; grid-template-columns: 44px 1fr auto;
+  align-items: center; gap: 20px; padding: 26px 30px;
+}
+.proj-num { font-size: 12px; color: var(--muted); font-weight: 600; font-family: 'Syne',sans-serif; }
+.proj-title { font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 4px; letter-spacing: -0.3px; }
+.proj-meta { font-size: 13px; color: var(--muted); }
+.proj-badge {
+  background: rgba(200,247,90,0.08); border: 1px solid rgba(200,247,90,0.2);
+  color: var(--accent); padding: 5px 14px; border-radius: 100px;
+  font-size: 12px; font-weight: 600; white-space: nowrap; font-family: 'Syne',sans-serif;
+}
+.proj-body { display: none; padding: 0 30px 28px 88px; }
+.proj-item.open .proj-body { display: block; }
+.proj-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+.detail-block label {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--muted); display: block; margin-bottom: 8px; font-weight: 500;
+}
+.detail-block p { font-size: 14px; color: var(--text); line-height: 1.65; }
+
+/* ── WORKFLOW ── */
+.workflow-steps {
+  display: grid; grid-template-columns: repeat(5,1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: 10px;
+  overflow: hidden; margin-top: 44px;
+}
+.wf-step { background: var(--bg2); padding: 28px 22px; }
+.wf-num { font-size: 11px; color: var(--accent); letter-spacing: 0.12em; font-weight: 600; margin-bottom: 14px; }
+.wf-step h4 { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.wf-step p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+/* ── WHY HIRE ── */
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 44px; }
+.why-card { border: 1px solid var(--border); border-radius: 10px; padding: 28px; background: var(--bg2); }
+.why-card h4 { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 10px; letter-spacing: -0.3px; }
+.why-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+/* ── PRICING ── */
+.pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 44px; }
+.price-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 34px 26px; position: relative;
+}
+.price-card.feat { border-color: rgba(200,247,90,0.35); background: rgba(200,247,90,0.03); }
+.price-badge {
+  position: absolute; top: -1px; right: 22px;
+  background: var(--accent); color: #0a0a0a;
+  font-size: 11px; font-weight: 700; font-family: 'Syne',sans-serif;
+  padding: 4px 12px; border-radius: 0 0 6px 6px;
+}
+.price-tier { font-size: 11px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; margin-bottom: 14px; }
+.price-amt {
+  font-family: 'Syne', sans-serif; font-size: 40px; font-weight: 800;
+  color: var(--white); letter-spacing: -2px; margin-bottom: 6px;
+}
+.price-desc { font-size: 13px; color: var(--muted); margin-bottom: 22px; line-height: 1.6; }
+.price-feats { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 26px; }
+.price-feats li { font-size: 13.5px; color: var(--text); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+.price-feats li::before { content:''; width:6px; height:6px; background:var(--accent); border-radius:50%; flex-shrink:0; margin-top:6px; }
+
+/* ── TESTIMONIALS ── */
+.testi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; margin-top: 44px; }
+.testi {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 10px; padding: 30px 26px;
+}
+.testi-text { font-size: 14.5px; color: var(--text); line-height: 1.8; margin-bottom: 22px; font-style: italic; font-weight: 300; }
+.author-name { font-family: 'Syne',sans-serif; font-size: 14px; font-weight: 700; color: var(--white); }
+.author-role { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+/* ── CONTACT ── */
+.contact-box {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 12px; padding: 64px; text-align: center;
+  margin-top: 44px; position: relative; overflow: hidden;
+}
+.contact-box::after {
+  content: ''; position: absolute; bottom: -80px; right: -80px;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(200,247,90,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.contact-box h2 { font-size: clamp(26px, 4vw, 40px); margin-bottom: 14px; }
+.contact-box p { color: var(--muted); font-size: 16px; max-width: 460px; margin: 0 auto 32px; font-weight: 300; }
+.contact-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.contact-info { margin-top: 22px; font-size: 14px; color: var(--muted); }
+.contact-info a { color: var(--accent); text-decoration: none; }
+.contact-info a:hover { text-decoration: underline; }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border); padding: 28px 60px;
+  display: flex; justify-content: space-between; align-items: center;
+  max-width: 1160px; margin: 0 auto;
+}
+footer p { font-size: 13px; color: var(--muted); }
+.foot-logo { font-family: 'Syne',sans-serif; font-weight: 800; font-size: 15px; color: var(--muted); }
+.foot-logo span { color: var(--accent); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  section { padding: 60px 20px; }
+  .hero-wrap { padding: 110px 20px 60px; }
+  .about-grid, .services-grid, .why-grid,
+  .pricing-grid, .testi-grid { grid-template-columns: 1fr; }
+  .skills-grid, .proof-nums { grid-template-columns: repeat(2,1fr); }
+  .workflow-steps { grid-template-columns: 1fr; }
+  .proj-header { grid-template-columns: 40px 1fr; }
+  .proj-badge { display: none; }
+  .proj-body { padding: 0 20px 24px 20px; }
+  .proj-grid { grid-template-columns: 1fr; }
+  .hero-stats { gap: 24px; }
+  .contact-box { padding: 36px 22px; }
+  footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px 20px; }
+}
+</style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <a href="#" class="logo">Lakshmanan Vishnu I</a>
-            <div class="hamburger-menu">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="#hero">Home</a></li>
-                    <li><a href="#video-showcase">My Works</a></li>
-                    <li><a href="#about-me">About me</a></li>
-                    <li><a href="#achievements">Achievements</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <section id="hero">
-        <div class="container">
-            <h1 class="animate-on-load">Edits That Hold Retention</h1>
-            <p class="animate-on-load">Crafting compelling stories from your footage.</p>
-            <a href="#contact" class="cta-button animate-on-load">Let's Talk</a>
-        </div>
-    </section>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Lakshmanan <span>Vishnu I</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Hire Me</a>
+</nav>
 
-    <section id="video-showcase" class="hidden">
-        <div class="container">
-            <h2>Video Works</h2>
-            <div class="gallery">
-                <div class="gallery-item">
-                    <img src="Images/img1.png" alt="Video Thumbnail">
-                    <div class="overlay">
-                        <a href="https://drive.google.com/file/d/14pSriyIhiB0OolhYyh3ExL7xOx5B3oaU/view?t=3" target="_blank" class="watch-button">Watch Now</a>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="Images/img2.png" alt="Video Thumbnail">
-                    <div class="overlay">
-                        <a href="https://drive.google.com/file/d/1wZCrGX7pEFenZa7QA46YnWav4cNdhcTs/view" target="_blank" class="watch-button">Watch Now</a>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="Images/IMG3.jpg" alt="Video Thumbnail">
-                    <div class="overlay">
-                        <a href="https://drive.google.com/file/d/1LuMaf1H3WdQyJLZRCyzezGIRoVO6BoQX/view" target="_blank" class="watch-button">Watch Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ═══ HERO ═══ -->
+<div class="hero-wrap">
+  <div>
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      @Vishnu · Available for new projects
+    </div>
+    <h1>
+      Editing that<br>
+      <span class="acc">holds</span><br>
+      <span class="dim">retention.</span>
+    </h1>
+    <p class="hero-sub">
+      I help creators and brands turn raw footage into polished, watch-worthy video — built for retention, engagement, and real results.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-p">View My Work</a>
+      <a href="#contact" class="btn-g">Let's Talk</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-n">11M</div>
+        <div class="stat-l">Reel Views (90 days)</div>
+      </div>
+      <div>
+        <div class="stat-n">3.3M</div>
+        <div class="stat-l">Accounts Reached</div>
+      </div>
+      <div>
+        <div class="stat-n">82</div>
+        <div class="stat-l">Reels Published</div>
+      </div>
+      <div>
+        <div class="stat-n">567K</div>
+        <div class="stat-l">Shares Generated</div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <section id="about-me" class="hidden">
-        <div class="container">
-            <h2>About me</h2>
-            <div class="achievements-list">
-                <div class="achievement-item">
-                    <h3>Welcome</h3>
-                    <p>I’m a short-form video editor focused on creating edits that hold attention.
-                        I work primarily with reels and social media content, emphasizing clean cuts, strong hooks, and smooth pacing. </p><p>My approach is simple: remove distractions, highlight the message, and keep viewers watching.</p>
-                </div>
-                <div class="achievement-item">
-                    <h3>Education</h3>
-                    <p>Bachelor’s Degree in Computer Science
-                        - 2025</p>
-                </div>
-                <div class="achievement-item">
-                    <h3>Editing Tools</h3>
-                    <ul class="achievements">
-                        <li>CapCut — Short-form video editing (Reels & Shorts)</li>
-                        <li>Instagram Reels / YouTube Shorts — Platform-optimized edits</li>
-                        <li>AI Image Generation — Prompt-based visuals</li>
-                        <li>Basic HTML & CSS — Portfolio layout & animations</li>
-                        <li>Premier Pro — Proffessional Videos with Smooth & animations</li>
-                    </ul>
-                </div> 
-            </div>
-        </div>
-    </section>
+<div class="divider"></div>
 
-    <section id="achievements" class="hidden">
-        <div class="container">
-            <h2>Achievements & Page Growth</h2>
-            <div class="gallery">
-                <div class="gallery-item">
-                    <img src="Images/p1.jpeg" alt="Video Thumbnail">
-                    <div class="overlay">
-                        <a href="https://www.instagram.com/wolf_cuts_2.0/" target="_blank" class="watch-button">View Page</a>
-                    </div>
-                </div>
-            </div>
-            <div class="achievements-list">
-                <div class="achievement-item">
-                    <ul class="achievements">
-                        <li> <strong>11+ million total views</strong> across Instagram content</li>
-                        <li> Generated <strong>6 million views within 30 days</strong> on short-form edits</li>
-                        <li> Grew the page to <strong>6.3K followers in under 3 months</strong></li>
-                        <li> Received <strong>5,000+ positive audience comments</strong></li>
-                        <li> Built and managed a high-engagement editing page on Instagram</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="about-grid">
+    <div>
+      <h2>I edit video.<br>Not just footage.</h2>
+      <div class="about-text">
+        <p>I'm the editor behind <strong>@wolf_cuts_2.0</strong> — a page I built from zero that generated <strong>11M reel views</strong> and reached <strong>3.3M accounts</strong> in 90 days, with 8.2K followers and 82 reels. No paid promotion. Just editing.</p>
+        <p>I work with Instagram creators, and early-stage brands who need a reliable editor — someone who cares about results, not just deliverables. Proficient in CapCut, Adobe Premiere Pro, After Effects, and DaVinci Resolve.</p>
+        <p>If your content loses viewers in the first 30 seconds, that's the exact problem I fix.</p>
+      </div>
+    </div>
+    <div class="about-side">
 
-    <section id="contact" class="hidden">
-        <div class="container">
-            <h2>Get In Touch</h2>
-            <p>I'm available for freelance work. Drop me a line!</p>
-            <a href="mailto:lakshmananvishnu103@gmail.com" class="cta-button">Email</a>
-            <p style="margin-top: 15px;">lakshmananvishnu103@gmail.com</p>
-        </div>
-    </section>
+      
+      <div class="tool-tag"><span class="tool-dot"></span> CapCut pc/mob</div>
+      <div class="tool-tag"><span class="tool-dot"></span> After Effects</div>
+      <div class="tool-tag"><span class="tool-dot"></span> Adobe Premiere Pro </div>
+      <div class="tool-tag"><span class="tool-dot"></span> DaVinci Resolve </div>
+      <div class="tool-tag"><span class="tool-dot"></span> Reels / Shorts / YouTube Editing</div>
+      <div class="tool-tag"><span class="tool-dot"></span> Cinematic Cuts + Retention Pacing</div>
+      <div class="tool-tag"><span class="tool-dot"></span> Captions, Sound Design, Thumbnails</div>
+    </div>
+  </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Lakshmanan Vishnu I. All Rights Reserved.</p>
-        </div>
-    </footer>
+  <!-- PROOF BAR -->
+  <div class="proof-bar">
+    <div class="proof-label">Verified Instagram Insights · @wolf_cuts_2.0 · Nov 20, 2025 – Feb 18, 2026 (90 days)</div>
+    <div class="proof-nums">
+      <div><div class="proof-n">11M</div><div class="proof-l">Reel Views</div></div>
+      <div><div class="proof-n">3.3M</div><div class="proof-l">Accounts Reached</div></div>
+      <div><div class="proof-n">1.9M</div><div class="proof-l">Likes</div></div>
+      <div><div class="proof-n hi">567K</div><div class="proof-l">Shares</div></div>
+      <div><div class="proof-n">115K</div><div class="proof-l">Saves</div></div>
+      <div><div class="proof-n">27K</div><div class="proof-l">Reposts</div></div>
+    </div>
+    <div class="proof-footer">
+      <span>82 Reels published</span>
+      <span>·</span>
+      <span>8.2K Followers</span>
+      <span>·</span>
+      <span>6.6K Comments</span>
+      <span>·</span>
+      <a href="https://www.instagram.com/wolf_cuts_2.0" target="_blank">View on Instagram ↗</a>
+    </div>
+  </div>
+</section>
 
-    <script src="script.js"></script>
+<!-- ═══ SKILLS ═══ -->
+<section id="skills">
+  <div class="section-label">Capabilities</div>
+  <h2>What I bring<br>to every cut.</h2>
+  <div class="skills-grid">
+    <div class="skill-cell">
+      <h4>Short-Form Editing</h4>
+      <p>Reels, Shorts, and TikToks edited for hook, pace, and platform behavior. Every second earns the next.</p>
+    </div>
+    <div class="skill-cell">
+      <h4>Long-Form YouTube</h4>
+      <p>Structured edits with clean pacing, chapter logic, and retention-focused cut points that keep viewers watching.</p>
+    </div>
+    <div class="skill-cell">
+      <h4>Color Grading</h4>
+      <p>LUT-based and manual grading in DaVinci Resolve. Cinematic, brand-consistent, or documentary — I match the mood.</p>
+    </div>
+    <div class="skill-cell">
+      <h4>Motion Graphics</h4>
+      <p>Titles, lower thirds, animated captions, and basic visual effects using After Effects.</p>
+    </div>
+    <div class="skill-cell">
+      <h4>Sound Design</h4>
+      <p>Audio cleanup, music sync, SFX layering, and dialogue leveling for professional, broadcast-ready sound.</p>
+    </div>
+    <div class="skill-cell">
+      <h4>Pacing &amp; Retention</h4>
+      <p>I study watch time data and edit specifically to reduce drop-off, maintain momentum, and reward viewers.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ SERVICES ═══ -->
+<section id="services">
+  <div class="section-label">Services</div>
+  <h2>What I offer.</h2>
+  <div class="services-grid">
+    <div class="svc-card">
+      <div class="svc-num">01</div>
+      <h3>YouTube Video Editing</h3>
+      <p>Full edit of talking-head, vlog, educational, or documentary-style videos. Includes cut, color, captions, B-roll integration, and audio polish.</p>
+      <div class="svc-for">For: YouTubers, educators, vloggers</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">02</div>
+      <h3>Reels &amp; Short-Form Content</h3>
+      <p>Hook-first, fast-paced editing for Instagram Reels, YouTube Shorts, and TikTok. Captions, transitions, and audio sync included.</p>
+      <div class="svc-for">For: Influencers, personal brands, coaches</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">03</div>
+      <h3>Brand Video Editing</h3>
+      <p>Clean, professional edits for product promos, explainer videos, and brand storytelling. Focused on clarity and call-to-action flow.</p>
+      <div class="svc-for">For: Startups, D2C brands, agencies</div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-num">04</div>
+      <h3>Podcast Video Editing</h3>
+      <p>Multi-cam sync, audio leveling, lower thirds, and chapter cuts for long-form podcast content on YouTube and social.</p>
+      <div class="svc-for">For: Podcast hosts, thought leaders</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ PROJECTS ═══ -->
+<section id="projects">
+  <div class="section-label">Work</div>
+  <h2>Selected projects.</h2>
+  <div class="proj-list">
+
+    <div class="proj-item open" onclick="toggle(this)">
+      <div class="proj-header">
+        <div class="proj-num">01</div>
+        <div>
+          <div class="proj-title">@wolf_cuts_2.0 — Instagram Reels Page</div>
+          <div class="proj-meta">Self-Built · Short-form · 82 Reels · 90 days · Zero paid promotion</div>
+        </div>
+        <div class="proj-badge">11M Views Organic</div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-grid">
+          <div class="detail-block">
+            <label>The Challenge</label>
+            <p>Built from absolute zero with no paid promotion, no influencer shoutouts. Goal: prove that editing quality alone drives reach at scale.</p>
+          </div>
+          <div class="detail-block">
+            <label>What I Did</label>
+            <p>Edited 82 reels in 90 days — cinematic cuts, sound-synced transitions, pacing built for scroll-stopping hooks. Every video was a test in retention engineering.</p>
+          </div>
+          <div class="detail-block">
+            <label>Result</label>
+            <p>11M reel views, 3.3M accounts reached, 1.9M likes, 567K shares, 115K saves, 27K reposts — all verified via Instagram Insights.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- More projects can be added here in the same format -->
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ WORKFLOW ═══ -->
+<section id="workflow">
+  <div class="section-label">Process</div>
+  <h2>How we work together.</h2>
+  <div class="workflow-steps">
+    <div class="wf-step">
+      <div class="wf-num">STEP 01</div>
+      <h4>Brief</h4>
+      <p>You share goals, references, and raw files. I ask the right questions upfront so there are no surprises.</p>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">STEP 02</div>
+      <h4>First Cut</h4>
+      <p>I deliver a complete first edit within the agreed timeline. Structure, pacing, and story come first.</p>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">STEP 03</div>
+      <h4>Feedback</h4>
+      <p>You review with timestamped notes. I implement revisions clearly — no guessing, no back-and-forth loops.</p>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">STEP 04</div>
+      <h4>Polish</h4>
+      <p>Color, sound, captions, and final quality check. I don't deliver anything I wouldn't put my name on.</p>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">STEP 05</div>
+      <h4>Delivery</h4>
+      <p>Exported in your required format. Delivered via Google Drive or Frame.io, fully organized.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ WHY HIRE ME ═══ -->
+<section id="why">
+  <div class="section-label">Differentiation</div>
+  <h2>Why it works<br>with me.</h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <h4>The numbers are real and verifiable.</h4>
+      <p>11M views, 567K shares, 3.3M reached — all organic, all from @wolf_cuts_2.0. Not a claim. A track record you can check on Instagram right now.</p>
+    </div>
+    <div class="why-card">
+      <h4>I edit for retention, not just aesthetics.</h4>
+      <p>Good-looking video means nothing if people click away. Every cut is designed to move the viewer forward and keep them watching.</p>
+    </div>
+    <div class="why-card">
+      <h4>I bring creative input, not just execution.</h4>
+      <p>I'll suggest a better hook, a tighter structure, or a sound choice that elevates the edit. You don't have to direct every decision.</p>
+    </div>
+    <div class="why-card">
+      <h4>Communication is part of the service.</h4>
+      <p>Project updates proactively, on-time delivery, issues flagged before they become problems. No chasing, no vague delays.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ PRICING ═══ -->
+<section id="pricing">
+  <div class="section-label">Pricing</div>
+  <h2>Straightforward.<br>No surprises.</h2>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-tier">Starter</div>
+      <div class="price-amt">500rs</div>
+      <div class="price-desc">Per short-form video. Ideal for Reels and Shorts under 60 seconds.</div>
+      <ul class="price-feats">
+        <li>Up to 60-second edit</li>
+        <li>Captions &amp; audio sync</li>
+        <li>1 revision round</li>
+        <li>48-hour turnaround</li>
+        <li>Delivered in 1080p</li>
+      </ul>
+      <a href="#contact" class="btn-g" style="display:block;text-align:center;font-size:14px;padding:12px 20px;">Get Started</a>
+    </div>
+    <div class="price-card feat">
+      <div class="price-badge">Most Popular</div>
+      <div class="price-tier">Standard</div>
+      <div class="price-amt">1500rs</div>
+      <div class="price-desc">Per long-form YouTube video (up to 20 min). Full post-production.</div>
+      <ul class="price-feats">
+        <li>Full cut + structure edit</li>
+        <li>Color grade + audio mix</li>
+        <li>Captions + lower thirds</li>
+        <li>B-roll &amp; music integration</li>
+        <li>2 revision rounds</li>
+        <li>72-hour turnaround</li>
+      </ul>
+      <a href="#contact" class="btn-p" style="display:block;text-align:center;font-size:14px;padding:12px 20px;">Get Started</a>
+    </div>
+    <div class="price-card">
+      <div class="price-tier">Retainer</div>
+      <div class="price-amt">3000rs</div>
+      <div class="price-desc">Monthly package. 4 long-form + 8 short clips per month.</div>
+      <ul class="price-feats">
+        <li>4 long-form edits/month</li>
+        <li>8 short-form clips</li>
+        <li>Priority turnaround</li>
+        <li>Branded templates</li>
+        <li>Unlimited revisions</li>
+        <li>Direct communication</li>
+      </ul>
+      <a href="#contact" class="btn-g" style="display:block;text-align:center;font-size:14px;padding:12px 20px;">Let's Talk</a>
+    </div>
+  </div>
+  <p style="text-align:center;margin-top:24px;color:var(--muted);font-size:14px;">All prices in Indian Rupees (₹). Custom quotes available for brand campaigns and bulk projects.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section id="testimonials">
+  <div class="section-label">Testimonials</div>
+  <h2>What clients say.</h2>
+  <div class="testi-grid">
+    
+    <div class="testi">
+      <div class="testi-text">"Really transformed my content workflow. The attention to detail and storytelling approach is Great."</div>
+      <div class="author-name">Abz Deepak</div>
+      <div class="author-role">Content Creator · Instagram + YouTube</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="contact-box">
+    <div class="section-label" style="justify-content:center;">Contact</div>
+    <h2>Ready to work together?</h2>
+    <p>Send me your project brief and raw footage details. I'll respond within 24 hours with a clear plan and timeline.</p>
+    <div class="contact-btns">
+      <a href="mailto:hello@wolfcuts.com" class="btn-p">Email Me Directly</a>
+      <a href="https://www.instagram.com/wolf_cuts_2.0" target="_blank" class="btn-g">@wolf_cuts_2.0 ↗</a>
+    </div>
+    <div class="contact-info">
+      DM on Instagram <a href="https://www.instagram.com/wolf_cuts_2.0" target="_blank">@wolf_cuts_2.0</a>
+      &nbsp;·&nbsp; or email <a href="mailto:wolfcuts2point0@gmail.com">wolfcuts2point0@gmail.com</a>
+      &nbsp;·&nbsp; Response within 24 hours
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-logo">wolf_cuts<span>.</span>2.0</div>
+  <p>Available for freelance work — Worldwide</p>
+  <p>Built for results.</p>
+</footer>
+
+<script>
+function toggle(el) {
+  var isOpen = el.classList.contains('open');
+  document.querySelectorAll('.proj-item').forEach(function(p){ p.classList.remove('open'); });
+  if (!isOpen) el.classList.add('open');
+}
+</script>
+
 </body>
 </html>
